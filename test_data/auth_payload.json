@@ -1,0 +1,26 @@
+{
+    "registration_pld":{
+        "first_name":"user",
+        "last_name":"USER",
+        "username":"USER123",
+        "email":"user@user.com",
+        "password1":"validate333PASS",
+        "password2":"validate333PASS"
+    },
+
+
+    "not_valid_registration_pld":{
+        "first_name":"user2",
+        "last_name":"USER2",
+        "username":"USER2",
+        "email":"user.com",
+        "password1":"valid",
+        "password2":"valid"
+    },
+
+
+    "login_pld": {
+        "username":"USER123", 
+        "password":"validate333PASS"
+    }
+}

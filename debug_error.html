@@ -1,0 +1,271 @@
+
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            
+            <div id="jq-notification" class="position-fixed start-50 translate-middle-x z-3 alert alert-success fade show custom-shadow" style="display: none;" role="alert">
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="/static/deps/css/my_css.css">
+    <link rel="stylesheet" href="/static/deps/css/bootstrap.min.css">
+    
+
+    
+
+
+    <title>Регистрация</title>
+
+
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-blur  fixed-top"  data-bs-theme="light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Motolab</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Информация
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a class="dropdown-item  text-dark" href="#">Контактная информация</a></li>
+                                <li><a class="dropdown-item  text-dark" href="#">Доставка и оплата</a></li>
+                                <li><a class="dropdown-item  text-dark" href="#">Про нас</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link  text-dark" href="carts/cart.html">Корзина</a>
+                        </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link  text-dark" href="/user/login/">Войти</a>
+                            </li>
+                        
+                        
+                    </ul>
+                    <form class="d-flex" role="search" action="/catalog/search/" method='get'>
+                        <input class="form-control me-2" type="search" name='q' placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success text-dark" type="submit">Поиск</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    <section>
+        <div class="container-fluid">
+            <!-- Каталог и корзина с фиксированным расположением на странице -->
+            <div class="row mt-1 position-fixed z-3" style="top: 70px; left: 15px;">
+                <!-- Каталог -->
+                <div class="dropdown mb-2">
+                    <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Каталог
+                        <img class="mx-1" src="/static/deps/icons/grid-fill.svg" alt="Catalog Icon" width="16"
+                            height="16">
+                    </button>
+                    <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
+                        
+                        
+                            <li><a class="dropdown-item text-white" href="/catalog/vse-tovary/" >Все товары</a></li>
+                        
+                            <li><a class="dropdown-item text-white" href="/catalog/enduro/" >Эндуро</a></li>
+                        
+                            <li><a class="dropdown-item text-white" href="/catalog/pitbajki/" >Питбайки</a></li>
+                        
+                            <li><a class="dropdown-item text-white" href="/catalog/kvadrocikly/" >Квадроциклы</a></li>
+                        
+                        
+                    </ul>
+                </div>
+                <!-- Значек корзины, вызывает модальное окно -->
+                <div>
+                    <button type="button" class="btn btn-dark btn-secondary d-flex" id="modalButton"
+                        aria-expanded="false">
+                        <img class="mx-1" src="/static/deps/icons/basket2-fill.svg" alt="Catalog Icon" width="24"
+                            height="24">
+                        <span id="goods-in-cart-count">0</span>
+                    </button>
+                </div>
+                <!-- Разметка модального окна корзины -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3 class="text-center mb-4">Корзина</h3>
+                                <div class="container" id="cart-items-container">
+                                    <!-- Разметка корзины -->
+                                    <div class="card mb-3 text-bg-light shadow-lg">
+                                        <div class="card-header">
+                                            <h5 class="card-title">Товар</h5>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <div class="row text-center">
+                                                    <div class="col p-0">
+                                                        <div class="input-group">
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-dark btn-sm decrement"
+                                                                    data-cart-id="" data-cart-change-url="">-</button>
+                                                            </span>
+                                                            <input type="text" class="form-control number" value="1"
+                                                                readonly>
+                                                            <span class="input-group-btn">
+                                                                <button type="button" class="btn btn-dark btn-sm increment"
+                                                                    data-cart-id="" data-cart-change-url="">+</button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col p-0">
+                                                        <p>x 100.00 = </p>
+                                                    </div>
+                                                    <div class="col p-0"><strong>100.00 $</strong></div>
+                                                    <div class="col p-0">
+                                                        <a href="#" class="remove-from-cart" data-cart-id="">
+                                                            <img class="mx-1" src="/static/deps/icons/trash3-fill.svg"
+                                                                alt="Catalog Icon" width="16" height="16">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card mb-3 shadow-lg">
+                                        <div class="card-footer">
+                                            <p class="float-left">Итого <strong>1</strong> товар(а) на сумму</p>
+                                            <h4 class="float-left"><strong>100.00 $</strong></h4>
+                                        </div>
+                                    </div>
+                                    <!-- Закончилась разметка корзины -->
+                                </div>
+                                <a class="btn btn-dark" href="orders/create_order.html">
+                                    Оформить заказ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Закончилась разметка модального окна -->
+            </div>
+        </div>
+        <!-- Контент -->
+        <div class="container ">
+            <div class="row mt-1 ">
+                <div class="col-lg-2">
+                    <!-- Пустой блок на Ваше усмотрение -->
+                </div>
+                <div class="col-lg-10 text-white ">
+                    <!-- Контент на странице -->
+                    
+<div class="col-lg-10">
+    <!-- Контент на странице -->
+    <div class="row">
+        <div class="container mt-5 pt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-9 bg-white p-4 mb-5 mx-2 rounded custom-shadow">
+                    <h2 class="text-center mb-4 text-dark">Регистрация</h2>
+                    <form action="/user/registration/" method='post' >
+                        <input type="hidden" name="csrfmiddlewaretoken" value="Xc8aUuPvi8BlAqecftZoAKwr8x5dZ2gFwTa9wWegMr8aKCX126dGoeKtWMZW4VT8">
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="id_first_name" class="form-label text-dark">Имя*</label>
+                                <input type="text" class="form-control" id="id_first_name"
+                                    value="user"
+                                    name="first_name"
+                                    placeholder="Введите ваше имя" required> 
+                                    
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_last_name" class="form-label text-dark">Фамилия*</label>
+                                <input type="text" class="form-control" id="id_last_name"
+                                    value="USER"
+                                    name="last_name"
+                                    placeholder="Введите вашу фамилию" required>
+                                    
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_username" class="form-label text-dark">Имя пользователя*</label>
+                                <input type="text" class="form-control" id="id_username"
+                                    value="USER123"
+                                    name="username"
+                                    placeholder="Введите ваше имя пользователя" required>
+                                    
+                                         <div class="alert alert-danger"><ul class="errorlist"><li>Пользователь с таким именем уже существует.</li></ul></div>
+                                    
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_email" class="form-label text-dark">Email*</label>
+                                <input type="email" class="form-control" id="id_email"
+                                    value="user@user.com"
+                                    name="email"
+                                    placeholder="Введите ваш email" required>
+                                    
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_password1" class="form-label text-dark">Пароль*</label>
+                                <input type="password" class="form-control" id="id_password1"
+                                    value="validate333PASS"
+                                    name="password1"
+                                    placeholder="Введите пароль" required>
+                                    
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="id_password2" class="form-label text-dark">Подтверждение пароля*</label>
+                                <input type="password" class="form-control" id="id_password2"
+                                    value="validate333PASS"
+                                    name="password2"
+                                    placeholder="Подтвердите пароль" required>
+                                    
+                            </div> 
+                        </div>
+                        <button type="submit"
+                            class="btn btn-dark btn-block">Зарегистрироваться</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script src="/static/deps/js/jquery/jquery-3.7.0.min.js"></script>
+    <script src="/static/deps/js/jquery-events.js"></script>
+    <script src="/static/deps/js/jquery-ajax.js"></script>
+    <script src="/static/deps/js/bootstrap/bootstrap.bundle.min.js"></script>
+
+</body>
+
+
+</html>
+
